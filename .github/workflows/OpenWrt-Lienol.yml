@@ -23,10 +23,11 @@ env:
   REPO_URL: https://github.com/Lienol/openwrt
   REPO_BRANCH: master
   FEEDS_CONF: feeds/feeds.conf.Lienol
-  CONFIG_FILE: configs/Lienol.feeds.conf
+  CONFIG_FILE: configs/Lienol.feeds.conf.ignore
   SETUP_PACKAGES: scripts/Lienol/packages.sh
   SETUP_CONFIG: scripts/Lienol/config.sh
   UPLOAD_BIN_DIR: false
+  COMPILE_FIRMWARE: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   RELEASE_NAME: Lienol
@@ -95,6 +96,7 @@ jobs:
 
       - name: Compile the firmware
         id: compile
+        if: env.COMPILE_FIRMWARE == 'true' && !cancelled()
         run: |
           cd openwrt
           echo -e "$(nproc) thread compile"
