@@ -13,6 +13,8 @@ DEFAULT_SETTINGS_FILE="package/lean/default-settings/files/zzz-default-settings"
 sed -i "/uci commit system/i\uci set system.@system[0].hostname='OpenWrt'" $DEFAULT_SETTINGS_FILE
 # 修改默认主题
 sed -i "/uci commit luci/i\uci set luci.main.mediaurlbase=/luci-static/bootstrap" $DEFAULT_SETTINGS_FILE
+# 禁用DHCP服务（旁路由模式）
+sed -i 's|exit|uci set dhcp.lan.ignore="1"\nuci set dhcp.lan.dynamicdhcp="0"\nuci commit dhcp|g' $DEFAULT_SETTINGS_FILE
 
 # 修改一下固件版本，方便查看固件编译时间
 current_build_date=`date +"%Y/%m/%d"`

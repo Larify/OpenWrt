@@ -7,6 +7,8 @@ DEFAULT_SETTINGS_FILE="package/default-settings/files/zzz-default-settings"
 # 版本号增加构建日期（请保留Lienol相关的版本信息）
 FW_BUILD_DATE=`date +"%Y/%m/%d"`
 sed -i "s|OpenWrt SNAPSHOT|OpenWrt (${FW_BUILD_DATE})|g" $DEFAULT_SETTINGS_FILE
+# 禁用DHCP服务（旁路由模式）
+sed -i 's|exit|uci set dhcp.lan.ignore="1"\nuci set dhcp.lan.dynamicdhcp="0"\nuci commit dhcp|g' $DEFAULT_SETTINGS_FILE
 
 # 修改NTP时间同步服务器
 CONFIG_GENERATE_FILE="package/base-files/files/bin/config_generate"
