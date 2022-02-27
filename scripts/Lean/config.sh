@@ -4,7 +4,7 @@
 
 ### 系统配置 ###
 # 修改路由器IP
-sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
+# sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
 
 DEFAULT_SETTINGS_FILE="package/lean/default-settings/files/zzz-default-settings"
 # 修改默认密码

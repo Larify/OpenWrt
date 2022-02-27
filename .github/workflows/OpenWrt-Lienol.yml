@@ -21,7 +21,7 @@ on:
       routerip:
         description: 'Default OpenWrt router IP'
         required: false
-        default: '192.168.103.50'
+        default: '10.0.0.2'
 
 env:
   REPO_URL: https://github.com/Lienol/openwrt
@@ -88,7 +88,6 @@ jobs:
           chmod +x $SETUP_CONFIG
           cd $WORKING_DIR
           sed -i 's|192.168.1.1|${{ github.event.inputs.routerip }}|g' package/base-files/files/bin/config_generate
-          cat package/base-files/files/bin/config_generate | grep "lan)"
           $GITHUB_WORKSPACE/$SETUP_CONFIG
 
       - name: SSH connection to Actions
